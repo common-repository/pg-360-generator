@@ -1,0 +1,654 @@
+/**
+ *
+ * @link              http://ProdGraphy.com
+ * @since             1.0.0
+ * @package           pg360
+ * @wordpress-plugin
+ * Plugin Name:       360° Generator
+ * Plugin URI:        http://prodgraphy.com
+ * Version:           1.5.0
+ * Style gallery page in admin area
+*/
+
+body {
+    background-color: white;
+}
+
+.pg360fake {
+    display: none;
+}
+
+.pg360 {
+    float: left;
+    margin-right: 20px;
+    padding: 20px;
+    border: solid 2px rgb(212, 212, 212);
+}
+
+.pg360_delete {
+    color: darkred;
+}
+
+.pg360_edit {
+    color: #0073aa;
+}
+
+.pg360_pack {
+    display: table;
+    margin: 0 auto;
+}
+
+div .reel {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/**
+ * Watermark Style
+ */
+
+.pg360_watermark {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+
+/** 
+ * Thickbox Content style
+ */
+
+
+/*Tab 1 Content */
+
+.pg360_text_input {
+    border-radius: 10px;
+    width: 200px;
+}
+
+.input_label_tab1 {
+    margin-top: 5px;
+    width: 150px;
+    float: left;
+    display: block;
+}
+
+
+/*Tab 3 Content*/
+
+.type360 {
+    margin-right: 60px;
+}
+
+.user_input_tab3 {
+    border-radius: 5px;
+    width: 110px;
+}
+
+.input_label_tab3 {
+    margin-top: 5px;
+    width: 180px;
+    float: left;
+    display: block;
+}
+
+.user_input {
+    border-radius: 10px;
+    width: 100px;
+}
+
+.pg360-row-one {
+    max-width: 250px;
+    display: block;
+    vertical-align: top;
+}
+
+.pg360-row-two {
+    display: inline-block;
+    overflow: hidden;
+    margin-left: 10px;
+    max-width: 250px;
+}
+
+.pg360_slider {
+    overflow: hidden;
+}
+
+.pg360-field {
+    text-align: left;
+    padding: 5px 0px 5px 0;
+}
+
+
+/* 
+ * button  
+ */
+
+.pg360_control {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pg360_control_btn {
+    padding: 5px;
+    padding-bottom: 7px;
+    text-decoration: none;
+    margin: 5px;
+    border-radius: 20px;
+    border: none;
+}
+
+
+/*
+ *Loader
+ */
+
+.loader {
+    display: none;
+    position: absolute;
+    float: left;
+    left: 50%;
+    top: 50%;
+    z-index: 100;
+    width: 75px;
+    height: 75px;
+    margin: -75px 0 0 -75px;
+    border: 12px solid lightgrey;
+    border-radius: 50%;
+    border-top: 12px solid orangered;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/** 
+ * Gallery Page Edit tabs
+ */
+
+.pg360_name {
+    text-align: center;
+    font-size: 16px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+input[type=number] {
+    width: 60px;
+}
+
+.pg360-row-one {
+    display: inline-block;
+    padding-left: 0;
+    margin-left: 0;
+    overflow: hidden;
+}
+
+.example_img_text {
+    text-align: center;
+    color: darkgrey;
+}
+
+
+/**
+ *Tab 2
+ * Color -Filter control
+ */
+
+.ui-slider-horizontal {
+    max-width: 170px;
+    width: auto;
+    left: 130px;
+    top: 25px;
+    margin-bottom: 10px
+}
+
+.pg360_color_control {
+    width: 540px;
+    overflow: hidden;
+    /* add this to contain floated children */
+}
+
+.pg360_example img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    display: block;
+}
+
+.pg360_example {
+    max-width: 200px;
+    float: left;
+    border: 1px solid lightgrey;
+    margin-right: 20px;
+}
+
+.tab3_option_wrap {
+    width: 540px;
+    overflow: hidden;
+}
+
+.pg360_edit_buttons {
+    float: right;
+}
+
+
+/**
+ * On Sale Style
+ */
+
+.product {
+    margin: 2%;
+}
+
+.product-image {
+    margin-bottom: 10px;
+    position: relative;
+    min-height: 250px;
+}
+
+.onsale-section {
+    position: absolute;
+    top: -6px;
+}
+
+.onsale-section:after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    z-index: 10;
+}
+
+.onsale {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    padding: 12px 8px 6px;
+    border-top-right-radius: 8px;
+    width: 84px;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.onsale:before,
+.onsale:after {
+    position: absolute;
+    content: '';
+    display: block;
+}
+
+.onsale:before {
+    background: #6ec5d5;
+    height: 7px;
+    width: 6px;
+    left: -6px;
+    top: 0;
+}
+
+.onsale:after {
+    background: #96a0a2;
+    height: 7px;
+    width: 8px;
+    border-radius: 8px 8px 0 0;
+    left: -8px;
+    top: 0;
+}
+
+.product img {
+    display: block;
+}
+
+
+/**
+ * OverLay (can use any thing like :Out of Stock)
+ */
+
+.overlay_text_layer {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: auto;
+}
+
+.overlayDivClass:hover .overlayImgClass {
+    opacity: 0.5;
+}
+
+.overlayDivClass:hover .overlay_text_layer {
+    opacity: 1;
+}
+
+.overlayDivClass:hover .overlay {
+    width: 50px;
+    height: auto;
+}
+
+.overlay_text {
+    background-color: darkgrey;
+    color: black;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-radius: 60px;
+}
+
+
+/**
+ * 360 Hint
+ */
+
+.hint360Class {
+    opacity: 1;
+    display: block;
+    height: auto;
+    backface-visibility: hidden;
+}
+
+.hint360 {
+    transition: .5s ease;
+    opacity: .7;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+}
+
+.pg360_pack:hover .hint360 {
+    display: none;
+}
+
+.hint_360text {
+    display: table;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    padding: 16px;
+    border-radius: 15px;
+    margin: auto;
+}
+
+
+/**
+ * annotation thickbox style
+ */
+
+
+/** inside Side Bar*/
+
+.add_annotation_form {
+    display: none;
+}
+
+.p_annotation_form {
+    display: none;
+    color: lightgrey;
+}
+
+.pg360_side_Bar {
+    height: 90%;
+    width: 200px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 1;
+    background-color: #111;
+    overflow-x: scroll;
+    padding-top: 0px;
+    padding-left: 10px;
+}
+
+.pg360_image_container {
+    position: relative;
+    display: block;
+    width: 400px;
+    float: right;
+}
+
+.pg360_image_container img {
+    width: 400px;
+    height: auto;
+}
+
+.pg360_annotation_btn div {
+    margin-top: 10px;
+}
+
+.pg360_add_annotation_btn {
+    position: relative;
+    top: 50%;
+    left: 22%;
+}
+
+.pg360_delete_annotation_btn {
+    position: relative;
+    top: 50%;
+    left: 15%;
+}
+
+.user_annotation_type div {
+    position: relative;
+    left: 30%;
+    color: #d4d4d4;
+}
+
+.user_annotation_type dashicon {
+    color: orangered;
+}
+
+.user_input_annotation {
+    width: 90%;
+}
+
+.ann_label {
+    float: left;
+    width: 100px;
+}
+
+.ann_select {
+    width: 80px;
+}
+
+
+/**
+ * style Form to Delete annotation
+ */
+
+.delete_annotation_form {
+    display: none
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+tr:nth-child(odd) {
+    background-color: #9b9b9b;
+}
+
+.pg360_ControlButtons_ann {
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+}
+
+.reel-annotation a {
+    font-family: Sans-Serif;
+}
+
+.pg360_ann_table {
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 20px;
+}
+
+
+/**
+ * Style Annotation Massege
+ * Case of latent view
+ */
+
+.reel-annotation {
+    display: block;
+    z-index: 1000;
+}
+
+.pg360_ann_container {
+    opacity: 0.7;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 0;
+    border-radius: 10px;
+    display: none;
+    z-index: 100;
+    border: 2px solid white;
+}
+
+.pg360_ann_container:hover {
+    cursor: default;
+}
+
+.pg360_ann_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 20px;
+}
+
+.pg360_annotation_text_class {
+    margin-top: 5px;
+}
+
+.pg360_ann_title a {
+    text-decoration: none;
+}
+
+.pg360_ann_title {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.pg360_ann_title h3 {
+    margin-bottom: 0;
+    padding: 2px;
+}
+
+.pg360_annotation_text_class a {
+    text-decoration: none;
+}
+
+
+/* Tooltip text */
+
+.pg360_tooltip .pg360_tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text */
+    position: relative;
+    z-index: 1;
+    bottom: 150%;
+    left: 25%;
+    margin-left: 20px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+
+/* 
+ * Tooltip arrow 
+ */
+
+.pg360_tooltip .pg360_tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    /* Position the tooltip text */
+    position: relative;
+    z-index: 1;
+    bottom: 125%;
+    left: 20%;
+    margin-left: -60px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+
+/* Tooltip arrow */
+
+.pg360_tooltip .pg360_tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+
+/* Show the tooltip text when you mouse over the tooltip container */
+
+.pg360_tooltip:hover .pg360_tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/**
+ *Disabled
+ */
+
+.pg360_disabled {
+    color: rgb(207, 162, 162);
+}
+
+.reel {
+    touch-action: none;
+}
